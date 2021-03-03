@@ -1,9 +1,19 @@
+import { useState } from 'react';
+import { useActions } from '../hooks/useActions';
+
 const RepositoriesList: React.FC = () => {
+  const [term, setTerm] = useState('');
+  const { searchRepositories } = useActions();
+
+  const OnSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    searchRepositories(term);
+  };
   return (
     <div>
-      <form>
-        <input />
-        <button>Search</button>
+      <form onSubmit={OnSubmit}>
+        <input value={term} onChange={(e) => setTerm(e.target.value)} />
+        <button>Search </button>
       </form>
     </div>
   );
